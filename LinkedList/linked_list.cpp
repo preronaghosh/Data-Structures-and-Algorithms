@@ -20,12 +20,17 @@ public:
 
     LinkedList();
     ~LinkedList();
+
+    // basic operations
     void addNode_End(int value); // insert at the end of the list
     void addNode_Middle(int value, Node* prev_node); // insert after a given node 
     void addNode_Front(int value); // insert at the beginning of the list
     void deleteNode(int value); // delete the node with the passed value
     void displayList();
     int getListLength(); // returns the number of elements in the list
+
+    // more operations
+    void reverseList(); 
 };
 
 LinkedList::LinkedList() {
@@ -144,6 +149,22 @@ int LinkedList::getListLength() {
     }
     return count;
 }
+
+void LinkedList::reverseList() {
+    if (head == nullptr) {
+        std::cout << "No elements in list" << std::endl;
+        return;
+    } 
+
+    if (head->next == nullptr) {
+        std::cout << "Only one element in list. Cannot reverse." << std::endl;
+        return;
+    }
+
+    Node* curr = head->next;
+    
+
+} 
 
 int main() {
     LinkedList myList;
