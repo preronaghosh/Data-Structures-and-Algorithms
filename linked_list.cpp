@@ -25,6 +25,7 @@ public:
     void addNode_Front(int value); // insert at the beginning of the list
     void deleteNode(int value); // delete the node with the passed value
     void displayList();
+    int getListLength(); // returns the number of elements in the list
 };
 
 LinkedList::LinkedList() {
@@ -125,6 +126,25 @@ void LinkedList::deleteNode(int value) {
     std::cout << "Node with value " << value << " not found in the list" << std::endl;
 }
 
+int LinkedList::getListLength() {
+    // no elements in list
+    if (head == nullptr) {
+        return 0;
+    }
+    // single element
+    if (head->next == nullptr) {
+        return 1;
+    }
+
+    int count = 1;
+    Node* curr = head;
+    while (curr->next != nullptr) {
+        count++;
+        curr = curr->next;
+    }
+    return count;
+}
+
 int main() {
     LinkedList myList;
 
@@ -144,6 +164,8 @@ int main() {
 
     std::cout << "Linked List: " << std::endl;
     myList.displayList();
+
+    std::cout << "The list now has " << myList.getListLength() << " elements" << std::endl;
 
     return 0;
 }
