@@ -87,6 +87,17 @@ void addNewNodeToBST(Node* root, int val) {
     }
 }
 
+void deleteNodeFromBst(Node* root, int val) {
+    if (!root) return;
+
+    Node* temp = root;
+    while (temp) {
+        if (temp->data == val) {
+            
+        }
+    }
+}
+
 /*
         50
        /  \
