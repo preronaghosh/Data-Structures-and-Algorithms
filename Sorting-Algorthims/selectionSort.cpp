@@ -8,23 +8,14 @@
 void selectionSort(std::vector<int> &arr)
 {
     int n = arr.size();
-    for (int i = 0; i <= n - 2; i++)
-    {
-        int minPos = i;
-        for (int j = i + 1; j < n; j++)
-        {
-            if (arr[j] < arr[minPos])
-            {
+    for(int i=0; i<n; i++) {
+        int minPos=i;
+        for(int j=i+1; j<n; j++) {
+            if (arr[j] < arr[minPos]) {
                 minPos = j;
             }
         }
-        // swap arr[i] and arr[minPos]
-        if (minPos != i)
-        {
-            int temp = arr[i];
-            arr[i] = arr[minPos];
-            arr[minPos] = temp;
-        }
+        std::swap(arr[i], arr[minPos]);
     }
 }
 
@@ -39,7 +30,7 @@ void printArray(const std::vector<int> &arr)
 
 int main()
 {
-    std::vector<int> arr = {64, 25, 12, 22, 11};
+    std::vector<int> arr{8,5,7,3,2,1,10,12,9};
 
     std::cout << "Original array: ";
     printArray(arr);
