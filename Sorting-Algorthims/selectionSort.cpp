@@ -3,10 +3,9 @@
 
 /*
     Time Complexity = O(N x N)
-    Space Complexity - O(N)
+    Space Complexity - O(1)
 */
-void selectionSort(std::vector<int> &arr)
-{
+void selectionSort(std::vector<int> &arr) {
     int n = arr.size();
     for(int i=0; i<n-1; i++) {
         int minPos=i;
