@@ -1,8 +1,7 @@
-/* Depth First Search - Visit a node, take one sub-node, push current node to stack, visit the new node */
+/* Depth First Search - Visit a node, take one sub-node, push current node to stack (done by recursion automatically), visit the new node */
 
 #include <vector>
 #include <iostream>
-#include <stack>
 using namespace std;
 
 void dfs(int node, const vector<vector<int>>& adj, vector<bool>& visited) {
