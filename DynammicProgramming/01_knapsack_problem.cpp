@@ -9,7 +9,9 @@ int knapsack(int n, int W, vector<int>& wt, vector<int>& val) {
     // if we have reached last object OR capacity over
     if (n==0 || W == 0) return 0;
 
-    if (W - wt[n-1] < 0) {
+    // do not check <= 0 because going to 0 is fine here
+    // it just means that including this object will make it the last one being added to the sack
+    if (W - wt[n-1] < 0) { 
         // prevent recursive calls for when capacity has been exhausted
         return knapsack(n-1, W, wt, val);
     }
