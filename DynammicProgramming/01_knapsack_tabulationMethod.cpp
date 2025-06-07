@@ -8,7 +8,7 @@ int knapsack(int& W, vector<int>& wt, vector<int>& val, int& n) {
 
     // Build table dp[][] in bottom up manner
     for (int i=1; i<=n; i++) {
-        for(int j=0; j<=W; j++) {
+        for(int j=1; j<=W; j++) {
             // if current capacity j <= weight of current objet i, 
             // we can take it into the knapsack 
             if (wt[i-1] <= j) {
