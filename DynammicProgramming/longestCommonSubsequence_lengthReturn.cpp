@@ -25,12 +25,12 @@ int lengthOfLCSWithMemo(int i, int j, string& s1, string& s2, vector<vector<int>
 
     if (memo[i][j] != -1) return memo[i][j];
 
-    if (s1[i] == s2[j]) {
-        memo[i-1][j-1] = lengthOfLCS(i-1, j-1, s1, s2);
+    if (s1[i-1] == s2[j-1]) {
+        memo[i-1][j-1] = lengthOfLCSWithMemo(i-1, j-1, s1, s2, memo);
         memo[i][j] = 1 + memo[i-1][j-1];
     } else {
-        memo[i-1][j] = lengthOfLCS(i-1, j, s1, s2);
-        memo[i][j-1] = lengthOfLCS(i, j-1, s1, s2);
+        memo[i-1][j] = lengthOfLCSWithMemo(i-1, j, s1, s2, memo);
+        memo[i][j-1] = lengthOfLCSWithMemo(i, j-1, s1, s2, memo);
         memo[i][j] = max(memo[i-1][j], memo[i][j-1]);
     }
     return memo[i][j];
