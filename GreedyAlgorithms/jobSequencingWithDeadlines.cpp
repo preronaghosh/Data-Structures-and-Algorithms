@@ -24,7 +24,7 @@ struct Job {
 pair<int, int> jobSequencing(vector<Job>& jobs) {
     // 1. Sort jobs by profit in descending order
     sort(jobs.begin(), jobs.end(), [](Job& j1, Job& j2){
-        return j2.profit < j1.profit;
+        return j1.profit > j2.profit;
     });
 
     // 2: Find maximum deadline
