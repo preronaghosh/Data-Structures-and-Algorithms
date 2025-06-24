@@ -40,7 +40,7 @@ int main() {
     /* Min heap */
     vector<int> minArr = {0, 3, 1, 6, 5, 2, 4};
     for (int i = 1; i < minArr.size(); i++) {
-        insertIntoMinHeap(minArr, i);  // ✅ Use minArr
+        insertIntoMinHeap(minArr, i);
     }
 
     cout << endl << "Min Heap: ";
