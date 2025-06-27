@@ -1,5 +1,5 @@
-/** @brief Lower bound = smallest index in array where arr[index] >= target 
- * @brief Upper bound = smallest index in array where arr[index] > target
+/** @brief Lower bound = smallest index in array where arr[index] >= target (Either greater or equal to target)
+ * @brief Upper bound = smallest index in array where arr[index] > target (Strictly greater than target)
 */
 
 #include <iostream>
