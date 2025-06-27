@@ -7,41 +7,58 @@
 using namespace std;
 
 int getLowerBound(vector<int>& nums, int target) {
-    int low=0, high=nums.size()-1;
-    int ans=nums.size(); // if there is no lower bound, we always have the size of the array as lower bound for the target
+    int left=0, right = nums.size()-1;
+    // if no lower bound found for the target, return nums.size() which would mean the same
+    int idx = nums.size();
 
-    while (low <= high) {
-        int mid = low + (high-low)/2;
+    while (left <= right) {
+        int mid = (left + right)/2;
+        
+        // lower bound means the first value that is >= the target
+        // this may not be the first occurence of target in the array
+        // so go left even if nums[mid] == target, but store this index because
+        // we may not find another one on the left side of the array
         if (nums[mid] >= target) {
-            ans=mid;
-            high=mid-1;
-        } 
-        else low=mid+1;
+            idx = mid;
+            right = mid - 1;
+        } else {
+            left = mid+1;
+        }
     }
-    return ans;
+    return idx;
 }
 
 int getUpperBound(vector<int>& nums, int target) {
-    int low=0, high=nums.size()-1;
-    int ans=nums.size(); // if there is no lower bound, we always have the size of the array as lower bound for the target
+    int left = 0, right = nums.size() - 1;
+    int idx = nums.size(); // if no upper bound found for the target, return nums.size() which would mean the same
 
-    while (low <= high) {
-        int mid = low + (high-low)/2;
-        if (nums[mid] > target) {
-            ans=mid;
-            high=mid-1;
-        } 
-        else low=mid+1;
+    while (left <= right) {
+        int mid = (left + right)/2;
+
+        // if the value here is equal to target, go right because we want a strictly higher value (first one that is > than target) 
+        if (nums[mid] <= target) {
+            left = mid + 1;
+        } else {
+            // if nums[mid] is > target, then this is a possible index -> store it
+            // then go left because there could be a LESSER HIGHER value than the target on the left side of array
+            idx = mid;
+            right = mid-1;
+        }
     }
-    return ans;
+    return idx;
 }
 
 int main() {
     vector<int> nums = {3,5,8,15,19};
-    int ans = getLowerBound(nums, 9);
-    cout << "lower bound: " << ans << endl;
+    int ans = getLowerBound(nums, 9); // should print 15
+    cout << "lower bound: " << nums[ans] << endl; 
+    ans = getLowerBound(nums, 8); // should print 8
+    cout << "lower bound: " << nums[ans] << endl;
+
     nums = {2,3,6,7,8,8,11,11,11,12};
-    ans = getUpperBound(nums, 9);
-    cout << "Upper bound: " << ans << endl;
+    ans = getUpperBound(nums, 6); // should print 7
+    cout << "Upper bound: " << nums[ans] << endl;
+    ans = getUpperBound(nums, 9); // should print 11
+    cout << "Upper bound: " << nums[ans] << endl;
     return 0;
 }
