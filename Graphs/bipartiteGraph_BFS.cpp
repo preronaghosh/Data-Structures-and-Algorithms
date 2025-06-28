@@ -3,11 +3,11 @@
 #include <iostream>
 using namespace std;
 
-bool isBipartiteBFS(int& V, vector<vector<int>>& adj) {
-    vector<int> colored(V, -1); // initially all nodes are non-colored (-1)
+// colors one component
+bool bfsTraversal(int start, int& V, vector<vector<int>>& adj, vector<int>& colored) {
     queue<int> q;
-    colored[0] = 0; // start with color 0
-    q.push(0);
+    colored[start] = 0; // start with color 0
+    q.push(start);
 
     while(!q.empty()) {
         int node = q.front();
@@ -16,13 +16,27 @@ bool isBipartiteBFS(int& V, vector<vector<int>>& adj) {
         for (int neighbour : adj[node]) {
             if (colored[neighbour] == -1) {
                 // not coloured node
-                colored[neighbour] = !colored[node];
+                colored[neighbour] = 1 - colored[node];
             } else {
                 // neighbour is colored
                 // check the colour
                 if (colored[neighbour] == colored[node]) {
                     return false;
                 }
+            }
+        }
+    }
+    return true;
+}
+
+// graph may or may not have connected components 
+bool checkGraphBipartite(int &V, vector<vector<int>>& adj) {
+    vector<int> colored(V, -1); // initially all nodes are non-colored (-1)
+
+    for(int start=0; start<V; start++) {
+        if (colored[start] == -1) {
+            if (!bfsTraversal(start, V, adj, colored)) {
+                return false;
             }
         }
     }
@@ -40,7 +54,7 @@ int main() {
     adj[3] = {0, 2};
 
     cout << "Using BFS: ";
-    if (isBipartiteBFS(V, adj)) cout << "Graph is Bipartite" << endl;
+    if (checkGraphBipartite(V, adj)) cout << "Graph is Bipartite" << endl;
     else cout << "Graph is NOT Bipartite" << endl;
 
     return 0;
