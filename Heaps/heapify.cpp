@@ -1,5 +1,3 @@
-/* Leetcode 703. Kth Largest Element in a Stream */
-
 #include <vector>
 #include <queue>
 using namespace std;
@@ -8,7 +6,7 @@ class KthLargest {
     // By default, priority queues are max-heaps
     priority_queue<int, vector<int>, greater<int>> minHeap;
     int K;
-    
+
 public:
     KthLargest(int k, vector<int>& nums) {
         K = k;
