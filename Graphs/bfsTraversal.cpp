@@ -11,7 +11,6 @@ void bfs(int start, const vector<vector<int>>& adjList, vector<bool>& visited) {
     while (!q.empty()) {
         int temp = q.front();
         q.pop();
-        cout << "Node: " << temp << endl;
 
         for(int neighbour : adjList[temp]) {
             if (!visited[neighbour]) {
