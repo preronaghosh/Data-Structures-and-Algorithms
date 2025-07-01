@@ -1,4 +1,5 @@
 /* Detect a cycle in an Undirected Graph - using BFS */
+
 #include <vector>
 #include <iostream>
 #include <queue>
@@ -15,7 +16,7 @@ using namespace std;
 bool detectCycle(int start, vector<vector<int>>& adj, vector<bool>& visited) {
     visited[start] = true;
     queue<pair<int, int>> q;
-    q.push({start, -1});
+    q.push({start, -1}); // queue stores both current node and its parent node
 
     while (!q.empty()) {
        int currNode = q.front().first; 
@@ -27,9 +28,11 @@ bool detectCycle(int start, vector<vector<int>>& adj, vector<bool>& visited) {
                 visited[neighbour] = true;
                 q.push({neighbour, currNode});
             } else if (neighbour != parentNode) {
+                // if the neighbour node is in the current and being revisited again
+                // that means there is a cycle
                 return true;
             }
-       }     
+       }
     }
     return false;  
 }
