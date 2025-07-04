@@ -14,8 +14,11 @@ Notes:
 
 #include <vector>
 #include <queue>
+#include <iostream>
+#include <climits>
 using namespace std;
 
+// return a distance array with shortest paths from src to every other node
 vector<int> getShortestPath(int src, int V, vector<vector<vector<int>>>& adj) {
     // create a min heap to store: {distance, node}
     priority_queue<pair<int,int>, vector<pair<int,int>>, greater<>> pq;
@@ -49,3 +52,66 @@ vector<int> getShortestPath(int src, int V, vector<vector<vector<int>>>& adj) {
     return dist;
 }
 
+/* Return array of nodes in order which generate the shortest path between src and dest nodes.
+   Else, return {-1} when there is not shortest path from src to dest node.
+
+   This solution is good for small graphs; can be optimized for larger graphs and less memory usage 
+*/
+
+vector<int> printShortestPath(int src, int dest, int V, vector<vector<vector<int>>>& adj) {
+    // pair of {totalDistance from src to this node, full path from src upto this node}
+    priority_queue<pair<int,vector<int>>, vector<pair<int,vector<int>>>, greater<>> pq;
+
+    vector<int> dist(V, INT_MAX);
+    dist[src] = 0;
+
+    pq.push({0, {src}});
+
+    while (!pq.empty()) {
+        int d = pq.top().first;
+        vector<int> fullPath = pq.top().second;
+        int currNode = fullPath.back();
+        pq.pop();
+
+        if (currNode == dest) {
+            return fullPath;
+        }
+
+        for (auto& neighbor : adj[currNode]) {
+            int nextNode = neighbor[0]; 
+            int wt = neighbor[1];
+
+            int newDist = d + wt;
+            if (newDist < dist[nextNode]) {
+                dist[nextNode] = newDist;
+                vector<int> newPath = fullPath;
+                newPath.push_back(nextNode);
+                pq.push({newDist, newPath});
+            }
+        }
+    }
+    return {-1};
+}
+
+/* More optimized solution to return the shortest path as an array of all included nodes 
+
+- Use DFS
+
+*/
+vector<int> getShortestPathDijkstras(int src, int dest, int V, vector<vector<vector<int>>>& adj) {
+
+}
+
+int main() {
+    int V = 5;
+    vector<vector<vector<int>>> adj(V);
+    adj[0] = {{1, 2}, {2, 4}};
+    adj[1] = {{2, 1}, {3, 7}};
+    adj[2] = {{4, 3}};
+    adj[3] = {{4, 1}};
+    adj[4] = {};
+
+    vector<int> path = printShortestPath(0, 4, V, adj); // Expected path: 0 → 1 → 2 → 4 (total weight = 6)
+    for (int& val : path) cout << val << " -> ";
+    cout << endl;
+}
