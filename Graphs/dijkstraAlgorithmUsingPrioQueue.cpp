@@ -6,6 +6,10 @@ Notes:
     - Explanation in video: https://www.youtube.com/watch?v=V6H1qAeB-l4&list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn&index=32
     - The algorithms keeps running infinitely with negative weights because the newDist keeps reducing negatively and 
       is always better than the previous less negative weight
+
+
+- Time Complexity: E log V, where E = number of edeges, V = number of nodes
+
 */
 
 #include <vector>
