@@ -25,3 +25,13 @@ Solution Algos:
 - If the edge has not already been taken, consider it
 - Eventually, if there is already a path leading to a node, then don't take
 - Check `primsAlgorith_mst.cpp` for algorithm and code explanation
+
+
+#### Kruskal's Algorithm:
+- Also a Greedy approach
+- Create a list of all given edges and weights in the format : {weight, src, dest} 
+- Sort it in increasing order of weights (greedy part) 
+- Iterate over the list:
+  - For every combination, if node u and node v are not part of the same graph already, add the edge to mst
+  - If they are already connected, there is already a path between them. So, do not add this edge.
+  - Go to the next edge 
